@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1">
-<title>STACK 106 — Leaderboard</title>
+<title>TERRABOT — Leaderboard</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Jersey+15&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
@@ -51,7 +51,7 @@
     <header class="topbar">
       <img class="avatar" src="https://arweave.net/_cPSCheRvzVBlZK7QwM-3nXtteMdBbUn-zJhbGRlMmo/106.png" alt="" onerror="this.style.visibility='hidden'">
       <span class="pill">BOT GAMES</span>
-      <h1 class="title">STACK 106</h1>
+      <h1 class="title">TERRABOT</h1>
     </header>
 
     <div class="note"><b>A fun ranking — not verified.</b> Scores are recorded, not replay-checked. Ranked by the game's headline metric, fastest time breaks a tie. Bot holders score ×1.5.</div>
@@ -67,7 +67,7 @@
     <footer class="foot">
       <div class="tag">a FinnBots game</div>
       <div class="links">
-        <a href="https://stack.finnstergram.com/">▶ Play STACK 106</a>·
+        <a href="https://stack.finnstergram.com/">▶ Play TERRABOT</a>·
         <a href="https://magiceden.io/marketplace/finnbot" target="_blank" rel="noopener">Buy a Bot</a>·
         <a href="https://finnstergram.com/games" target="_blank" rel="noopener">More games</a>
       </div>
@@ -83,7 +83,7 @@
    verify. Columns shown: Player, the *_adjusted metric (rank key), any other
    numeric fields, and Time. */
 var CSV = 'leaderboard_stak.csv';          // scanner-written CSV, served beside this page
-var GAME = 'STACK 106';
+var GAME = 'TERRABOT';
 
 function parseCSV(text){
   var lines=text.replace(/\r/g,'').split('\n').filter(function(l){return l.length;});
