@@ -687,7 +687,12 @@ if(HEADLESS){ module.exports = { CFG, COLS, ROWS, SHAPES, newRun, stepGame }; }
 if(!HEADLESS){
 (function(){
   const cv=document.getElementById('game'), ctx=cv.getContext('2d');
-  cv.width=320; cv.height=352; const CW=320, CH=352;
+  /* SUPERSAMPLED BACKING STORE (2026-09-25): backed at SS x the game's own size and the
+     context scaled by SS, so every existing draw call still works in game units while
+     fillText gets SS times the pixels. SS is an integer, so the pixel art still lands on
+     whole device pixels. fitCanvas only touches cv.style, so the CSS size is unchanged. */
+  const SS=3;
+  cv.width=(320)*SS; cv.height=(352)*SS;  ctx.setTransform(SS,0,0,SS,0,0); ctx.imageSmoothingEnabled=false; const CW=320, CH=352;
   ctx.imageSmoothingEnabled=false;
   const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   let s=newRun(), active=true, prevPhase='play';
