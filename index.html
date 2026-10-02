@@ -1079,7 +1079,7 @@ if(!HEADLESS){
     }
 
     // ---- score memo (STAK — no seed, no move-log, no replay; records NOT verified) ----
-    function buildScoreMemo(res){ return MEMO_TAG+'|score|sig='+String(entrySig).slice(0,32)+'|score='+res.score+'|lines='+res.lines+'|level='+res.level+'|time='+res.timeMs; }
+    function buildScoreMemo(res){ return MEMO_TAG+'|score|sig='+String(entrySig).slice(0,32)+'|score='+res.score+'|lines='+res.lines+'|level='+res.level+'|time='+Math.round(res.timeMs); }
 
     // ---- flow glue (Bot Smash: single-run action game) ---------------------
     function relabelStart(){
