@@ -254,7 +254,7 @@ canvas{ touch-action:none; }
    turned that off for a pointer that IS a cursor, so a laptop kept thumb-sized
    keys it never needed. Measured at 1440x900 across the served roster: ten
    games carry a control block over 90px tall — RIVETBOT 152, BOTMAN/BURROBOT/
-   Mrs Bot 142, BotFord/DRUM PUSH/HOP 106 136 — and every one of those canvases
+   Mrs Bot 142, BotFord/DRUM PUSH/HOPBOT 136 — and every one of those canvases
    is HEIGHT-BOUND, so each pixel of pad comes straight out of the play area.
    The pad stays (people do click it), it just stops being a thumb rest.
    Measured gain: +4.6% to +8.5% canvas height on eight games, and because the
@@ -506,7 +506,7 @@ canvas{ touch-action:none; }
       '.fb-seed-btn:focus-visible{outline:2px solid #3a6ff7;outline-offset:2px}' +
       '.fb-seed .s{display:none}' +
       /* The game's own NAME outranks this chip. At 375px the long label pushed
-       * "WING 106" out of the topbar and left the title rendering as "W..",
+       * "WINGBOT" out of the topbar and left the title rendering as "W..",
        * so below 560px the chip drops the date and uses its short label. A
        * badge that costs a game its title is not worth the information. */
       '@media (max-width:560px){.fb-seed{font-size:10px;padding:3px 3px 3px 7px;gap:4px}' +
@@ -548,7 +548,7 @@ canvas{ touch-action:none; }
      2. CABINET — the canvas reads as an arcade screen: bezel, amber rim light, glow.
      3. THEME  — dark-mode parity with the hub (games.finnstergram.com adapts, the
                  games did not, so hub -> game was a light/dark slap in the face).
-   v2: the PIXEL bot mark (16x16 monitor head, magenta smile — the face of Bots #106/#20)
+   v3: the PIXEL bot mark is Bot 2969, the main character (full colour, 16x16, outlined)
    shared with finnstergram.com and the hub, and a NIGHT-MODE SWITCH in the topbar.
    Section 4 below is written ONCE; apply-brand.js emits it twice — for "the device is
    dark and the player has not chosen light", and for "the switch says dark" — scoping
@@ -993,7 +993,7 @@ body:not(.mode-paid) .app .facts{ display:block !important; }
 <body>
   <div class="wrap">
     <header class="topbar">
-      <!--fb:pill--><a class="fb-mark" href="https://games.finnstergram.com" aria-label="FinnBots — more games"><svg class="fb-bot" viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true" focusable="false"><path fill="currentColor" d="M7 1h2v2H7zM2 3h12v1H2zM1 4h14v9H1zM2 13h12v1H2zM0 7h1v3H0zM15 7h1v3h-1z"/><path fill="var(--fb-amber)" d="M7 0h2v1H7z"/><path fill="var(--fb-screen)" d="M2 5h12v7H2z"/><path fill="var(--fb-face,#ff4fd8)" d="M4 6h2v1H4zM3 7h1v2H3zM6 7h1v2H6zM10 6h2v1h-2zM9 7h1v2H9zM12 7h1v2h-1zM4 10h1v1H4zM11 10h1v1h-1zM5 11h6v1H5z"/></svg><span class="fb-word">FINN<i>BOTS</i></span></a><button class="fb-theme" type="button" role="switch" aria-checked="false" aria-label="Night mode"><span class="fbt-track" aria-hidden="true"><span class="fbt-thumb"><svg class="fbt-sun" viewBox="0 0 7 7" shape-rendering="crispEdges"><path fill="#e8891c" d="M2 2h3v3H2zM3 0h1v1H3zM3 6h1v1H3zM0 3h1v1H0zM6 3h1v1H6zM1 1h1v1H1zM5 1h1v1H5zM1 5h1v1H1zM5 5h1v1H5z"/></svg><svg class="fbt-moon" viewBox="0 0 7 7" shape-rendering="crispEdges"><path fill="#3d3f9e" d="M2 0h3v1H2zM1 1h2v1H1zM0 2h2v3H0zM1 5h2v1H1zM2 6h3v1H2zM4 5h2v1H4z"/></svg></span></span></button><!--/fb-->
+      <!--fb:pill--><a class="fb-mark" href="https://games.finnstergram.com" aria-label="FinnBots — more games"><svg class="fb-bot" viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true" focusable="false"><path fill="#2a2350" d="M2 2h12v1H2zM1 3h1v1H1zM14 3h1v1H14zM0 4h1v1H0zM15 4h1v1H15zM0 5h1v1H0zM15 5h1v1H15zM0 6h1v1H0zM15 6h1v1H15zM0 7h1v1H0zM15 7h1v1H15zM0 8h1v1H0zM15 8h1v1H15zM0 9h1v1H0zM15 9h1v1H15zM0 10h1v1H0zM15 10h1v1H15zM0 11h1v1H0zM15 11h1v1H15zM0 12h1v1H0zM15 12h1v1H15zM1 13h1v1H1zM14 13h1v1H14zM2 14h12v1H2z"/><path fill="#ff8fc8" d="M3 0h2v1H3zM11 0h2v1H11zM3 1h2v1H3zM11 1h2v1H11z"/><path fill="#8fd3f5" d="M2 3h12v1H2zM1 4h14v1H1zM1 5h14v1H1zM1 6h14v1H1zM1 7h14v1H1zM1 8h14v1H1zM1 9h14v1H1zM1 10h14v1H1zM1 11h14v1H1zM1 12h14v1H1zM2 13h12v1H2z"/><path fill="#5aa9d6" d="M1 4h3v1H1zM1 5h3v1H1zM1 6h3v1H1zM1 7h3v1H1zM1 8h3v1H1zM1 9h3v1H1zM1 10h3v1H1zM1 11h3v1H1zM1 12h3v1H1z"/><path fill="#fff" d="M3 5h4v1H3zM9 5h4v1H9zM3 6h4v1H3zM9 6h4v1H9zM3 7h4v1H3zM9 7h4v1H9z"/><path fill="#2a2350" d="M4 5h1v1H4zM11 5h1v1H11zM4 6h2v1H4zM10 6h2v1H10z"/><path fill="#fff" d="M4 10h8v1H4zM4 11h8v1H4z"/><path fill="#2a2350" d="M6 10h1v1H6zM8 10h1v1H8zM10 10h1v1H10zM6 11h1v1H6zM8 11h1v1H8zM10 11h1v1H10z"/></svg><span class="fb-word">FINN<i>BOTS</i></span></a><button class="fb-theme" type="button" role="switch" aria-checked="false" aria-label="Night mode"><span class="fbt-track" aria-hidden="true"><span class="fbt-thumb"><svg class="fbt-sun" viewBox="0 0 7 7" shape-rendering="crispEdges"><path fill="#e8891c" d="M2 2h3v3H2zM3 0h1v1H3zM3 6h1v1H3zM0 3h1v1H0zM6 3h1v1H6zM1 1h1v1H1zM5 1h1v1H5zM1 5h1v1H1zM5 5h1v1H5z"/></svg><svg class="fbt-moon" viewBox="0 0 7 7" shape-rendering="crispEdges"><path fill="#3d3f9e" d="M2 0h3v1H2zM1 1h2v1H1zM0 2h2v3H0zM1 5h2v1H1zM2 6h3v1H2zM4 5h2v1H4z"/></svg></span></span></button><!--/fb-->
       <h1 class="title">TERRABOT</h1>
       <button class="iconbtn" id="muteBtn" aria-label="Mute sound" title="Mute (M)">♪</button>
       <button class="iconbtn" id="restartBtn" aria-label="Restart" title="Restart (R)">⟲</button>
@@ -1060,7 +1060,7 @@ body:not(.mode-paid) .app .facts{ display:block !important; }
     <div class="card">
       <h2 id="rulesTitle">HOW TO PLAY</h2>
       <ul class="rules">
-        <li><b>STACK:</b> Bot 106 drops parts into the well. Fill a whole row and it clears.</li>
+        <li><b>STACK:</b> Bot 2969 drops parts into the well. Fill a whole row and it clears.</li>
         <li><b>Move:</b> ◀ ▶ shift · <b>⟳</b> / Up rotate · <b>▼</b> soft drop · <b>DROP</b> / Space slams it down.</li>
         <li><b>HOLD</b> / C parks a piece for later — one swap per drop. Watch <b>NEXT</b>.</li>
         <li>Four rows at once = a <b>BAY</b> (big points). Gravity speeds up every 10 lines.</li>
@@ -1103,7 +1103,7 @@ body:not(.mode-paid) .app .facts{ display:block !important; }
 <script>
 "use strict";
 /* ==========================================================================
-   STACK 106 — FinnBots.  ENGINE (falling-parts stack loop).
+   TERRABOT — FinnBots.  ENGINE (falling-parts stack loop).
    The whole board + piece model is PURE on the run-state `s` (no DOM), so VERIFY
    can require() it and a no-input run tops out via gravity. Render + input live
    in the if(!HEADLESS) half.  Contract kept:
@@ -1114,7 +1114,7 @@ body:not(.mode-paid) .app .facts{ display:block !important; }
    ========================================================================== */
 
 const CFG = { name:'TERRABOT', memoNS:'STAK', chassis:'sink-leaderboard',
-              subdomain:'stack.finnstergram.com', port:9017, hero:106, accent:'#34c6d6', entryOIL:25, scorePost:1 };
+              subdomain:'stack.finnstergram.com', port:9017, hero:2969, accent:'#34c6d6', entryOIL:25, scorePost:1 };
 
 /* ---- board geometry + tuning -------------------------------------------- */
 const COLS=10, ROWS=22, HIDE=2, VIS=ROWS-HIDE;   // 10 wide, 20 visible + 2 hidden spawn rows
@@ -1304,7 +1304,7 @@ if(!HEADLESS){
 
   // ---- hero (operator face) ----
   const heroImg=new Image(); let heroReady=false;
-  heroImg.onload=function(){ heroReady=true; }; heroImg.src='assets/hero/bot-106.png';
+  heroImg.onload=function(){ heroReady=true; }; heroImg.src='assets/hero/bot-2969.png';
 
   // ---- static starfield (branded depth, cheap) ----
   const stars=[]; (function(){ let seed=1337; function rnd(){ seed=(seed*1103515245+12345)&0x7fffffff; return seed/0x7fffffff; }
@@ -1397,13 +1397,13 @@ if(!HEADLESS){
       ctx.fillText('SHIFT OVER', WELL_X+WELL_W/2, WELL_Y+WELL_H/2); ctx.textAlign='left'; }
 
     // ---- side panel ----
-    // operator frame (Bot 106)
+    // operator frame (Bot 2969)
     const fx=PANEL_X, fy=WELL_Y, fw=PANEL_W, fh=86;
     ctx.fillStyle='#0e090f'; rrect(fx,fy,fw,fh,8); ctx.fill();
     ctx.strokeStyle='rgba(58,111,247,.5)'; ctx.lineWidth=1; rrect(fx,fy,fw,fh,8); ctx.stroke();
     if(heroReady){ const isz=64, ix=fx+(fw-isz)/2, iy=fy+8; ctx.drawImage(heroImg, ix, iy, isz, isz); }
     ctx.fillStyle='#f5c8a0'; ctx.font='9px "Plus Jakarta Sans",system-ui'; ctx.textAlign='center';
-    ctx.fillText('OPERATOR 106', fx+fw/2, fy+fh-7); ctx.textAlign='left';
+    ctx.fillText('OPERATOR 2969', fx+fw/2, fy+fh-7); ctx.textAlign='left';
     // NEXT + HOLD boxes
     function labelBox(label,ty,piece,dim){
       ctx.fillStyle='#f2a03d'; ctx.font='11px "Jersey 15",system-ui'; ctx.textAlign='left';
