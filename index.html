@@ -1196,9 +1196,9 @@ body:not(.mode-paid) .app .facts{ display:block !important; }
 
     <div class="controls" aria-label="Controls">
       <div class="cluster">
-        <button class="ctl" id="btnLeft" type="button" aria-label="Move left">◀</button>
-        <button class="ctl" id="btnDown" type="button" aria-label="Soft drop">▼</button>
-        <button class="ctl" id="btnRight" type="button" aria-label="Move right">▶</button>
+        <button class="ctl" id="padL" type="button" aria-label="Move left">◀</button>
+        <button class="ctl" id="padD" type="button" aria-label="Soft drop">▼</button>
+        <button class="ctl" id="padR" type="button" aria-label="Move right">▶</button>
       </div>
       <div class="cluster">
         <button class="ctl fire wide" id="btnHold" type="button" aria-label="Hold piece">HOLD</button>
@@ -1587,9 +1587,9 @@ if(!HEADLESS){
   function holdBtn(id,onDown,onUp){ const el=$(id); if(!el)return;
     const dn=function(e){ e.preventDefault(); el.classList.add('on'); onDown(); }, up=function(e){ e.preventDefault(); el.classList.remove('on'); if(onUp)onUp(); };
     el.addEventListener('pointerdown',dn); el.addEventListener('pointerup',up); el.addEventListener('pointerleave',up); el.addEventListener('pointercancel',up); }
-  holdBtn('btnLeft', function(){ keyLeft=true; }, function(){ keyLeft=false; });
-  holdBtn('btnRight', function(){ keyRight=true; }, function(){ keyRight=false; });
-  holdBtn('btnDown', function(){ softKey=true; }, function(){ softKey=false; });
+  holdBtn('padL', function(){ keyLeft=true; }, function(){ keyLeft=false; });
+  holdBtn('padR', function(){ keyRight=true; }, function(){ keyRight=false; });
+  holdBtn('padD', function(){ softKey=true; }, function(){ softKey=false; });
   holdBtn('btnRotate', function(){ cmd('cw'); });
   holdBtn('btnDrop', function(){ cmd('hard'); });
   holdBtn('btnHold', function(){ cmd('hold'); });
@@ -1622,7 +1622,9 @@ if(!HEADLESS){
   cv.addEventListener('pointerup',function(e){ if(!tp)return; const dx=e.clientX-tp.x, dy=e.clientY-tp.y, dt=Date.now()-tp.t; tp=null;
     if(dt<400 && Math.abs(dx)<16 && Math.abs(dy)<16){ cmd('cw'); return; }
     if(dy>36 && dy>Math.abs(dx)){ cmd('hard'); return; }
-    if(dx<-24){ cmd('L'); } else if(dx>24){ cmd('R'); } });
+    /* a long swipe moves as far as the finger went — one column per ~28px (2026-11-22: on a phone swipe is the control) */
+    const n=Math.max(1,Math.min(9,Math.round(Math.abs(dx)/28)));
+    if(dx<-24){ for(let i=0;i<n;i++) cmd('L'); } else if(dx>24){ for(let i=0;i<n;i++) cmd('R'); } });
 
   // ---- engine contract (Paid layer arms/observes a run) ----
   function startRun(){ s=freshRun(); active=true; prevPhase='play'; clearInput(); rulesO.classList.remove('show'); overO.classList.remove('show'); paidO.classList.remove('show'); }
@@ -3183,7 +3185,7 @@ var FB_FAMILY_CODEC = (function(){
   }catch(e){ /* the family layer must never break a game */ }
 })();
 </script>
-<script id="fb-coach" data-fb-goal="Fit the falling parts. Clear full rows." data-fb-touch="Tap ◀ ▶ to move, ⟳ to turn" data-fb-keys="← → move · ↑ rotate · ↓ drop · Space slam · C hold">
+<script id="fb-coach" data-fb-goal="Fit the falling parts. Clear full rows." data-fb-touch="Swipe to move · tap to turn" data-fb-keys="← → move · ↑ rotate · ↓ drop · Space slam · C hold" data-fb-gesture="native">
 /* FinnBots COACH LAYER — the first 30 seconds (brief 1, 2026-10-27).
    Founder: "First 30 seconds of each of the six: starts instantly, the goal is obvious without reading, the first
    death/win feels good." Before this, a first-time player landed on a 115-193 word How to play card and had to read
@@ -3229,6 +3231,28 @@ var FB_FAMILY_CODEC = (function(){
     watch.observe(rules, { attributes: true, attributeFilter: ['class'] });
     setTimeout(function () { if (watch) { watch.disconnect(); watch = null; } }, 1500);
   }
+
+  /* 1b. a START CARD at boot (2026-11-22 first-minute sweep: Bot Merge's 60-word "Tap to start" card and Mr Bot's
+     "Start shift" card sat over the board — one more card to read and dismiss, which the coach exists to remove).
+     If the game shows a FREE start card (#startCard whose button is not a paid/wallet one), it is hidden and the game's
+     own start button is pressed on the player's first touch on the game. A touch on any other button (Free/Paid, ⓘ)
+     brings the card back untouched. Never on a wallet return (returned above). */
+  (function () {
+    var sc = document.getElementById('startCard'), sb = sc && sc.querySelector('button');
+    if (!sc || !sb || /oil|paid|wallet|connect|25/i.test(sb.textContent || '')) return;
+    var ov = sc.closest ? (sc.closest('.overlay') || sc) : sc;
+    var vis = function (e) { try { var r = e.getBoundingClientRect(); return r.width > 0 && r.height > 0 && getComputedStyle(e).visibility !== 'hidden'; } catch (x) { return false; } };
+    if (!vis(sb)) return;
+    var prev = ov.style.display; ov.style.display = 'none'; ov.setAttribute('data-fb-autostart', '1');
+    var arm = function (e) {
+      if (!e.isTrusted) return;
+      ['pointerdown', 'keydown'].forEach(function (ev) { document.removeEventListener(ev, arm, true); });
+      ov.style.display = prev; ov.removeAttribute('data-fb-autostart');
+      var t = e.target, isUi = t && t.closest && t.closest('button, a, input, select, [role=button], .modebar');
+      if (!isUi && sb.click) sb.click();
+    };
+    ['pointerdown', 'keydown'].forEach(function (ev) { document.addEventListener(ev, arm, true); });
+  })();
 
   /* 2. the goal + the one control, over the live game */
   if (!goal) return;
